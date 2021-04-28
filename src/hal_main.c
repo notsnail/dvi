@@ -9,7 +9,6 @@
 int main()
 {
     // initialization (no touchy!!!!)
-    SetTraceLogLevel(LOG_FATAL);
     AppInit("YO YO YO!", 2);
 
     // register scenes here

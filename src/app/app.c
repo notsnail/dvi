@@ -15,6 +15,7 @@ void AppInit(const char* app_name, int magnification)
         TheGameIsLackingCoconutError();
     }
 
+    SetTraceLogLevel(LOG_FATAL);
     SetConfigFlags(FLAG_WINDOW_HIGHDPI);
 
     InitWindow(HAL_INTERNAL_WIDTH * magnification, HAL_INTERNAL_HEIGHT * magnification, app_name);
