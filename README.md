@@ -5,6 +5,6 @@ good documentation? dont know her.
 todo list -> TODO.txt
 check the makefiles. windows is updated
 
-dependencies:
+### dependencies:
 - raylib
 - libxml2
