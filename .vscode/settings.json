@@ -1,0 +1,16 @@
+{
+    "files.associations": {
+        "*.hls": "xml",
+        "*.hlm": "xml",
+        "hal_sprite.h": "c",
+        "time.h": "c",
+        "hal_util.h": "c",
+        "g_intro.h": "c",
+        "tinyfiledialogs.h": "c",
+        "stdio.h": "c",
+        "mod_play.h": "c",
+        "v2.h": "c",
+        "hal_scene.h": "c",
+        "haldefs.h": "c"
+    }
+}

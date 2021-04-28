@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- EXAMPLE HALCYON MAP FILE -->
+<map name="the construct">
+    <player src="[filename]"/>
+    
+</map>
