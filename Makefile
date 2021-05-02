@@ -5,13 +5,13 @@ cc = gcc
 
 src_path = ./src
 bin_path = ./bin
-lib_path = ./lib/osx
+lib_path = ./lib/osx # we on osx
 resource_path = ./res
 bin = hal
 
 src = $(src_path)/*.c $(src_path)/gfx/*.c $(src_path)/app/*.c $(src_path)/util/*.c $(src_path)/vendor/*.c
 c_flags = $(raylib_flags) -w -s -O2 
-ld_flags = -L"$(lib_path)" -lxml2
+ld_flags = -L$(lib_path) -lxml2 -lphysfs
 
 build:
 	@$(cc) -o $(bin_path)/$(bin) $(src) $(c_flags) $(ld_flags)

@@ -3,7 +3,7 @@
 
 #include <stdint.h>
 
-#define HAL_DEBUG_FEATURES 1
+#define HAL_DEBUG_FEATURES 0
 
 typedef uint8_t u8;
 typedef int8_t i8;

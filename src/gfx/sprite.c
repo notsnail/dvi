@@ -197,7 +197,7 @@ Sprite LoadSprite(const char* filename)
     xmlCleanupParser();
 
     #if !HAL_DEBUG_FEATURES
-    printf("loaded sprite %s, containing %i animations\n", return_value.name, return_value.total_animations);
+    printf("loaded sprite %s, containing %i animations\n", sprite.name, sprite.total_animations);
     #else
     float elapsed = (clock() - start);
 

@@ -3,12 +3,20 @@
 #include <stdlib.h>
 #include <raylib.h>
 #include "scene.h"
+
+// error handling
 #include "../util/error.h"
+// fs
+#include "../util/fs.h"
 
 RenderTexture _render_texture;
 
 void AppInit(const char* app_name, int magnification)
 {
+    // open virtual fs and open base package.
+    FSOpen("./");
+    // FSMount("base.pak", true);
+
     // top secret coconut nut verification system
     if (!FileExists("img/coconut.jpg"))
     {
@@ -30,6 +38,8 @@ void AppCleanup()
 {
     UnloadRenderTexture(_render_texture);
     CloseWindow();
+
+    FSClose();
 }
 
 static void AppUpdate()
