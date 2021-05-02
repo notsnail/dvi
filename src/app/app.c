@@ -2,23 +2,26 @@
 
 #include <stdlib.h>
 #include <raylib.h>
-#include "scene.h"
 
-// error handling
+#include "scene.h"
 #include "../util/error.h"
-// fs
-#include "../util/fs.h"
+#include "../vendor/raylib-physfs.h"
 
 RenderTexture _render_texture;
+
+#define PHYSFS_ERROR -1212
 
 void AppInit(const char* app_name, int magnification)
 {
     // open virtual fs and open base package.
-    FSOpen("./");
-    // FSMount("base.pak", true);
+    if (!InitPhysFS())
+    {
+        FatalErrorWithCode("physfs didnt initialize!\n", PHYSFS_ERROR);
+    }
+    MountPhysFS("./", NULL); // this is temporary as i dont have a .pak file in there yet
 
     // top secret coconut nut verification system
-    if (!FileExists("img/coconut.jpg"))
+    if (!FileExistsInPhysFS("img/coconut.jpg"))
     {
         TheGameIsLackingCoconutError();
     }
@@ -39,7 +42,7 @@ void AppCleanup()
     UnloadRenderTexture(_render_texture);
     CloseWindow();
 
-    FSClose();
+    ClosePhysFS();
 }
 
 static void AppUpdate()
