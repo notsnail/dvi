@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 
+#include "../app/app.h"
 #include "../app/scene.h"
 #include "../vendor/tinyfiledialogs.h"
 
@@ -30,6 +31,7 @@ void FatalErrorWithCode(const char* why, int code)
 {
     tinyfd_messageBox("bruh!", why, "ok", "error", 1);
     UnloadScene();
+    AppCleanup();
     exit(code);
 }
 

@@ -18,15 +18,19 @@ void AppInit(const char* app_name, int magnification)
     {
         FatalErrorWithCode("physfs didnt initialize!\n", PHYSFS_ERROR);
     }
-    MountPhysFS("./", NULL); // this is temporary as i dont have a .pak file in there yet
+    MountPhysFS("halcyon.zip", NULL); // this is temporary as i dont have a .pak file in there yet
 
     // top secret coconut nut verification system
     if (!FileExistsInPhysFS("img/coconut.jpg"))
     {
         TheGameIsLackingCoconutError();
     }
+    else
+    {
+        printf("found the coconut.\n");
+    }
 
-    SetTraceLogLevel(LOG_FATAL);
+    SetTraceLogLevel(LOG_WARNING);
     SetConfigFlags(FLAG_WINDOW_HIGHDPI);
 
     InitWindow(HAL_INTERNAL_WIDTH * magnification, HAL_INTERNAL_HEIGHT * magnification, app_name);

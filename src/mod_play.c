@@ -7,6 +7,8 @@
 
 #include "util/haldefs.h"
 
+#include "vendor/raylib-physfs.h"
+
 Camera2D camera = { 0 };
 Sprite player_sprite;
 
@@ -23,14 +25,14 @@ float upper = 64;
 
 static void init()
 {
-    background = LoadTexture("img/sagat.png");
+    background = LoadTextureFromPhysFS("img/sagat.png");
 
     camera.zoom = 1.0f;
     camera.offset = (Vector2) { HAL_INTERNAL_WIDTH / 2, HAL_INTERNAL_HEIGHT / 2 };
     camera.rotation = 0.0f;
 
     player.where = (Vector2) { 0, 80 };
-    player_sprite = LoadSprite("img/ryu.hls");
+    player_sprite = LoadSprite("img/ryu.sprite");
 
     SetTargetFPS(60);
 }

@@ -6,6 +6,8 @@
 #include "../util/util.h"
 #include "../util/haldefs.h"
 
+#include "../vendor/raylib-physfs.h"
+
 #include <time.h>
 
 #pragma region Specification
@@ -85,12 +87,17 @@ Sprite LoadSprite(const char* filename)
     xmlInitParser();
 
     // load document
-    xmlDocPtr document = xmlReadFile(filename, NULL, 0);
+    int doc_str_size;
+    unsigned char* doc_str = LoadFileDataFromPhysFS(filename, &doc_str_size);
+
+    xmlDocPtr document = xmlParseDoc(doc_str);
     if (document == NULL) // validate
     {
         printf("failed to open xml file\n");
         return (Sprite) { 0 };
     }
+
+    UnloadFileData(doc_str);
 
     // start parsing
     xmlNode* root = xmlDocGetRootElement(document);
@@ -105,7 +112,7 @@ Sprite LoadSprite(const char* filename)
     // set up initial variables
     sprite.name = xmlGetProp(root, "name");
     char* texture_path = xmlGetProp(root, "src");
-    sprite.spritesheet = LoadTexture(texture_path);
+    sprite.spritesheet = LoadTextureFromPhysFS(texture_path);
 
     #if HAL_DEBUG_FEATURES
     printf ("name: %s, texture path: %s\n", sprite.name, texture_path);

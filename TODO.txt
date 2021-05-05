@@ -1,6 +1,6 @@
 [ ] everything
     [ ] general
-        [ ] compiling for web
+        [$] compiling for web // postponed
             [ ] agony agony
             {x} NOTE: compiles but doesn't run :/
         [ ] input
@@ -19,8 +19,15 @@
             [x] XML wrapper that makes code
                 easier to read
             [x] switch to libxml2
-        [ ] lightmapping
-        [ ] shaders???
+        [ ] lighting
+            [ ] light types
+        [ ] dithering
+    [ ] filesystem
+        [ ] setup efficient sprite storage system
+            [ ] probably something like a .WAD
+        [ ] setup .pak files
+        [x] setup physfs
+[ ] game specific stuff
     [ ] gameplay
         [ ] player
             [ ] saving player data

@@ -20,7 +20,11 @@ void BindScene(int index) // passing -1 to this function quits the application
     UnloadScene();
     currentScene = index;
 
-    if (index < 0) exit(0);
+    if (index < 0) 
+    {
+        AppCleanup();
+        exit(0);
+    }
     InitScene();
 }
 
