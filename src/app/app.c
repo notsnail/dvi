@@ -4,7 +4,7 @@
 #include <raylib.h>
 
 #include "scene.h"
-#include "../util/error.h"
+#include "../hal/error.h"
 #include "../vendor/raylib-physfs.h"
 
 RenderTexture _render_texture;
@@ -18,7 +18,7 @@ void AppInit(const char* app_name, int magnification)
     {
         FatalErrorWithCode("physfs didnt initialize!\n", PHYSFS_ERROR);
     }
-    MountPhysFS("halcyon.zip", NULL); // this is temporary as i dont have a .pak file in there yet
+    MountPhysFS("halcyon.pak", NULL); // this is temporary as i dont have a .pak file in there yet
 
     // top secret coconut nut verification system
     if (!FileExistsInPhysFS("img/coconut.jpg"))

@@ -3,8 +3,8 @@
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 
-#include "../util/util.h"
-#include "../util/haldefs.h"
+#include "../hal/util.h"
+#include "../hal/haldefs.h"
 
 #include "../vendor/raylib-physfs.h"
 

@@ -3,9 +3,9 @@
 #include <math.h>
 
 #include "gfx/sprite.h"
-#include "util/error.h"
+#include "hal/error.h"
 
-#include "util/haldefs.h"
+#include "hal/haldefs.h"
 
 #include "vendor/raylib-physfs.h"
 
