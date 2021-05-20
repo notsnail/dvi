@@ -10,18 +10,18 @@
 #include "vendor/raylib-physfs.h"
 
 Camera2D camera = { 0 };
-Sprite player_sprite;
 
 Texture2D background;
 
 struct {
     Vector2 where;
+    Sprite sprite;
 } player;
 
-float offset_x = 0;
+f32 offset_x = 0;
 
-float lower = -104;
-float upper = 64;
+f32 lower = -104;
+f32 upper = 64;
 
 static void init()
 {
@@ -32,7 +32,7 @@ static void init()
     camera.rotation = 0.0f;
 
     player.where = (Vector2) { 0, 80 };
-    player_sprite = LoadSprite("img/ryu.sprite");
+    player.sprite = LoadSprite("img/ryu.sprite");
 
     SetTargetFPS(60);
 }
@@ -60,8 +60,8 @@ static void update()
 
     player.where.x += delta_x;
 
-    if (delta_x != 0) SpriteBindIndex(&player_sprite, 1);
-    else SpriteBindIndex(&player_sprite, 0);
+    if (delta_x != 0) SpriteBindIndex(&player.sprite, 1);
+    else SpriteBindIndex(&player.sprite, 0);
 
     camera.target = (Vector2) { 
         player.where.x,
@@ -78,7 +78,7 @@ static void update()
         camera.target.x = (float) upper;
     }
 
-    UpdateSprite(&player_sprite);
+    UpdateSprite(&player.sprite);
 }
 
 static void draw()
@@ -89,7 +89,7 @@ static void draw()
         // parallax
         DrawTextureRec(background, (Rectangle) { 0, 0, 512, 128 }, (Vector2) { -256 + offset_x, -64 }, WHITE);
 
-        //normal
+        // normal
         DrawTextureRec(background, (Rectangle) { 0, 128, 512, 64 }, (Vector2) { -256 , 96 - 64}, WHITE);
         DrawTextureRec(background, (Rectangle) { 0, 240, 512, 112 }, (Vector2) { -256, -16 - 64 }, WHITE);
         DrawTextureRec(background, (Rectangle) { 0, 192, 512, 48 }, (Vector2) { -256, 160 - 64 }, WHITE);
@@ -104,7 +104,7 @@ static void draw()
         DrawTextureRec(background, (Rectangle) { 0, 352, 512, 464 }, (Vector2) { 0, 160 }, WHITE);
 
         // Player
-        DrawSprite(&player_sprite, player.where);
+        DrawSprite(&player.sprite, player.where);
     EndMode2D();
 
     DrawText(TextFormat("%i", GetFPS()), 1, 1, 5, GREEN);
@@ -112,7 +112,7 @@ static void draw()
 
 static void unload()
 {
-    UnloadSprite(&player_sprite);
+    UnloadSprite(&player.sprite);
     UnloadTexture(background); 
 }
 

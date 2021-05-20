@@ -44,7 +44,5 @@ void TheGameIsLackingCoconutError()
         "error",
         1
     );
-
-    UnloadScene();
     exit(NO_COCONUT);
 }

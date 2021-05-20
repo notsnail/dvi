@@ -6,7 +6,7 @@
 
 #include "mod_play.h"
 
-int main()
+int main(int argc, char* argv[])
 {
     // initialization (no touchy!!!!)
     AppInit("YO YO YO!", 2);
