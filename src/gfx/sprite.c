@@ -9,27 +9,6 @@
 #include "../vendor/raylib-physfs.h"
 
 #include <time.h>
-
-#pragma region Specification
-#define SPRITE_XML_ANIM_ID 1
-
-static const char* XML_Schema = "<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n" \
-                                "<schema>\n" \
-                                "   <document name=\"sprite\">\n" \
-                                "       <attribute name=\"name\"/>\n" \
-                                "       <attribute name=\"src\"/>\n" \
-                                "       <collection name=\"anim\" id=\"1\">\n" \
-                                "           <attribute name=\"name\"/>\n" \
-                                "           <attribute name=\"speed\"/>\n" \
-                                "           <collection name=\"frame\">\n" \
-                                "               <attribute name=\"src\"/>\n" \
-                                "           </collection>\n" \
-                                "       </collection>\n" \
-                                "   </document>\n" \
-                                "</schema>"  
-;
-#pragma endregion Specification
-
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -62,12 +41,30 @@ static int CountChildren(xmlNode* node)
     return count;
 }
 
+static int CountChildElementsOfType(xmlNode* node, unsigned char* data_type)
+{
+    int count = 0;
+    for (xmlNode* each = node->children; each; each = each->next)
+    {
+        if (each->type == XML_ELEMENT_NODE)
+        {
+            if (strcmp(data_type, each->name) == 0)
+            {
+                count++;
+            }            
+        }
+    }
+
+    return count;
+}
+
 static int CountChildElements(xmlNode* node)
 {
     int count = 0;
     for (xmlNode* each = node->children; each; each = each->next)
     {
-        if (each->type == XML_ELEMENT_NODE) {
+        if (each->type == XML_ELEMENT_NODE) 
+        {
             count++;
         }
     }
@@ -96,7 +93,6 @@ Sprite LoadSprite(const char* filename)
         printf("failed to open xml file\n");
         return (Sprite) { 0 };
     }
-
     UnloadFileData(doc_str);
 
     // start parsing
@@ -127,7 +123,7 @@ Sprite LoadSprite(const char* filename)
     sprite.current_animation = 0;
 
     // count amount of animations
-    sprite.total_animations = CountChildElements(root);
+    sprite.total_animations = CountChildElementsOfType(root, "anim");
 
     if (sprite.total_animations > 0)
     {
@@ -264,7 +260,6 @@ void DrawSprite(Sprite* sprite, Vector2 where)
     //             sprite->animations[sprite->current_animation].sources[sprite->frame_counter],
     //             where,
     //             WHITE);
-
 
     DrawTexturePro(sprite->spritesheet,
                 sprite->animations[sprite->current_animation].sources[sprite->frame_counter],
