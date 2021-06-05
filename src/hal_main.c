@@ -13,6 +13,7 @@ int main(int argc, char* argv[])
 
     // register scenes here
     RegisterScene(0, &PlayExport);
+    RegisterScene(1, NULL);
 
     // main loop
     AppMain();

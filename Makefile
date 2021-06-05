@@ -14,13 +14,13 @@ c_flags = $(raylib_flags) -w -s -O2
 ld_flags = -L$(lib_path) -lxml2 -lphysfs
 
 build:
+	@mkdir bin
 	@$(cc) -o $(bin_path)/$(bin) $(src) $(c_flags) $(ld_flags)
 	@echo "compiling resource file:"
 	@cd $(resource_path); zip -r halcyon.pak *; mv halcyon.pak .$(bin_path)
 	@echo "successful build."
 clean:
 	@rm -r -f $(bin_path)
-	@mkdir bin
 	@echo "cleaned bin."
 run:
 	@cd $(bin_path); \
