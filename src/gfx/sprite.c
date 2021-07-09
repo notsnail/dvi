@@ -3,7 +3,6 @@
 #include <libxml/parser.h>
 #include <libxml/tree.h>
 
-#include "../hal/util.h"
 #include "../hal/haldefs.h"
 
 #include "../vendor/raylib-physfs.h"
@@ -13,18 +12,27 @@
 #include <string.h>
 #include <stdlib.h>
 
+static int QuickStoi(const char* str)
+{
+    int val = 0;
+    while (*str) {
+        val = val * 10 + (*str++ - '0');
+    }
+    return val;
+}
+
 static Rectangle StringToRectangle(const char* str)
 {
     int coords[4] = { 0, 0, 0, 0 };
     int count = 0;
 
     char* token = strtok(str, " ");
-    coords[count] = hal_stoi(token);
+    coords[count] = QuickStoi(token);
     count++;
 
     for (token = strtok(NULL, " "); token != NULL; token = strtok(NULL, " "))
     {
-        coords[count] = hal_stoi(token);
+        coords[count] = QuickStoi(token);
         count++;
     }
     return (Rectangle) { coords[0], coords[1], coords[2], coords[3] };
@@ -144,7 +152,7 @@ Sprite LoadSprite(const char* filename)
 
             // get speed
             char* speed_str = xmlGetProp(anim_element, "speed");
-            sprite.animations[each_anim].speed = hal_stoi(speed_str);
+            sprite.animations[each_anim].speed = QuickStoi(speed_str);
             free(speed_str);
 
             #if HAL_DEBUG_FEATURES
